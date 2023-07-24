@@ -24,6 +24,8 @@ int format_string(va_list ap)
 {
 	char *str = va_arg(ap, char *);
 
+	if (!str)
+		str = "(null)";
 	write(1, str, strlen(str) + 1);
 	return (strlen(str));
 }
@@ -60,9 +62,10 @@ int _printf(const char *format, ...)
 		{"%", format_percentage},
 		{NULL, NULL}
 	};
-
+	if (!format)
+		return (-1);
 	va_start(ap, format);
-	while (format && format[i])
+	while (format[i])
 	{
 		j = 0;
 		if (format[i] == '%')
