@@ -44,6 +44,24 @@ int format_percentage(va_list ap)
 }
 
 /**
+ * CheckFormat - checks if character is a valid specifer
+ *
+ * @c: charcter to check
+ *
+ * Return: 1 if character is a specifier, 0 otherwise
+ */
+int CheckFormat(char c)
+{
+	int i;
+	char *specifiers = "cs%";
+
+	for (i = 0; specifiers[i]; i++)
+		if (c == specifiers[i])
+			return (1);
+
+	return (0);
+}
+/**
  * _printf - a function that produces output
  *		according to a format
  *
@@ -68,7 +86,7 @@ int _printf(const char *format, ...)
 	while (format[i])
 	{
 		j = 0;
-		if (format[i] == '%')
+		if (format[i] == '%' && CheckFormat(format[i + 1]))
 		{
 			i += 1;
 
