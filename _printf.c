@@ -26,7 +26,7 @@ int format_string(va_list ap)
 
 	if (!str)
 		str = "(null)";
-	write(1, str, strlen(str) + 1);
+	write(1, str, strlen(str));
 	return (strlen(str));
 }
 
