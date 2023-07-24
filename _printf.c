@@ -3,32 +3,41 @@
 /**
  * format_char - formats character
  * @ap: argument pointer
+ *
+ * Return: number of bytes
  */
-void format_char(va_list ap)
+int format_char(va_list ap)
 {
 	char c = va_arg(ap, int);
 
 	write(1, &c, 1);
+	return (1);
 }
 
 /**
  * format_string - formats string
  * @ap: argument pointer
+ *
+ * Return: number of bytes
  */
-void format_string(va_list ap)
+int format_string(va_list ap)
 {
 	char *str = va_arg(ap, char *);
 
-	write(1, str, strlen(str));
+	write(1, str, strlen(str) + 1);
+	return (strlen(str));
 }
 
 /**
  * format_percentage - formats percentage
  * @ap: argument pointer
+ *
+ * Return: number of bytes
  */
-void format_percentage(va_list ap)
+int format_percentage(va_list ap)
 {
 	write(1, &"%", 1);
+	return (1);
 }
 
 /**
@@ -42,7 +51,7 @@ void format_percentage(va_list ap)
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, j;
+	int len = 0, i = 0, j;
 	va_list ap;
 	print_t print[] = {
 		{"c", format_char},
@@ -65,17 +74,19 @@ int _printf(const char *format, ...)
 			{
 				if (format[i] == print[j].print[0])
 				{
-					print[j].f(ap);
+					len += print[j].f(ap);
 				}
 				j++;
 			}
 		}
 		else
-			_printf("%c", format[i]);
+		{
+			write(1, &format[i], 1);
+			len++;
+		}
 		i++;
 	}
-	_printf("\n");
 	va_end(ap);
 
-	return (0);
+	return (len);
 }
