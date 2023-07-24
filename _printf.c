@@ -50,7 +50,7 @@ int format_percentage(va_list ap)
  * @format: the string format
  * @...: the arguments
  *
- * Return: always 0
+ * Return: number of chqrcters printed, -1 on error
  */
 int _printf(const char *format, ...)
 {
@@ -86,11 +86,10 @@ int _printf(const char *format, ...)
 		else
 		{
 			write(1, &format[i], 1);
-			len++;
+			len += 1;
 		}
 		i++;
 	}
 	va_end(ap);
-
 	return (len);
 }
