@@ -39,7 +39,9 @@ int format_string(va_list ap)
 int format_percentage(va_list ap)
 {
 	(void)ap;
-	write(1, &"%", 1);
+	char c = '%';
+
+	write(1, &c, 1);
 	return (1);
 }
 
