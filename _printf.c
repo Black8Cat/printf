@@ -55,7 +55,7 @@ int format_percentage(va_list ap)
 int CheckFormat(char c)
 {
 	int i;
-	char *specifiers = "cs%";
+	char *specifiers = "cs%di";
 
 	for (i = 0; specifiers[i]; i++)
 		if (c == specifiers[i])
@@ -66,7 +66,6 @@ int CheckFormat(char c)
 /**
  * _printf - a function that produces output
  *		according to a format
- *
  * @format: the string format
  * @...: the arguments
  *
@@ -80,6 +79,8 @@ int _printf(const char *format, ...)
 		{"c", format_char},
 		{"s", format_string},
 		{"%", format_percentage},
+		{"i", format_int},
+		{"d", format_int},
 		{NULL, NULL}
 	};
 	if (!format)
@@ -93,15 +94,12 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && CheckFormat(format[i + 1]))
 		{
 			i += 1;
-
 			if (format[i] == '\0')
 				return (-1);
 			while (print[j].print)
 			{
 				if (format[i] == print[j].print[0])
-				{
 					len += print[j].f(ap);
-				}
 				j++;
 			}
 		}

@@ -25,5 +25,8 @@ int _printf(const char *format, ...);
 int format_char(va_list ap);
 int format_string(va_list ap);
 int format_percentage(va_list ap);
+int format_int(va_list ap);
+int print_numbers(int n);
+int _putchar(char c);
 
 #endif
