@@ -23,7 +23,7 @@ int format_int(va_list ap)
 int print_numbers(int n)
 {
 	unsigned int i;
-	int len = 0;
+	static int len;
 
 	if (n < 0)
 	{
@@ -35,5 +35,6 @@ int print_numbers(int n)
 
 	if (i > 9)
 		print_numbers(i / 10);
-	_putchar(i % 10 + '0');
+	len += _putchar(i % 10 + '0');
+	return (len);
 }
