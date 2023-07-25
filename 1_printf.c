@@ -9,10 +9,8 @@
 int format_int(va_list ap)
 {
 	int i = va_arg(ap, int);
-	int len = 0;
 
-	len = print_numbers(i);
-	return (len);
+	return (print_numbers(i));
 }
 
 /**
